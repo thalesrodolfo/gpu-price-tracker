@@ -1,0 +1,10 @@
+import Config
+
+config :gpu_price_tracker,
+  ecto_repos: [GpuPriceTracker.Repo],
+  max_results: "10",
+  user: "gpubipolar",
+  keyword: "Menor"
+
+config :gpu_price_tracker, GpuPriceTracker.Repo,
+  database: "./database.db"

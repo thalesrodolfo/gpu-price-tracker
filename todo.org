@@ -1,0 +1,10 @@
+- [X] Criar credenciais no twitter
+- [X] Adicionar dependencias no projeto
+- [X] Executar requisição simples
+- [X] Executar requisisão ao perfil gpubipolar
+- [X] Informar palavra chave na requisição
+- [X] Criar arquivo de configuração
+- [X] Criar credenciais telegram
+- [X] Realizar envio de mensagem para o telegram após obter tweets de preço baixo
+- [ ] Agendar execuções
+- [ ] Enviar promoções apenas do dia

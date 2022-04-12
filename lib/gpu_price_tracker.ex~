@@ -1,0 +1,59 @@
+defmodule GpuPriceTracker do
+
+  def main do
+	
+	max_results = Application.fetch_env!(:gpu_price_tracker, :max_results)
+	user = Application.fetch_env!(:gpu_price_tracker, :user)
+	keyword = Application.fetch_env!(:gpu_price_tracker, :keyword)
+
+    base = "https://api.twitter.com/2/"
+
+	query = "query=from:#{user}%20#{keyword}"
+
+	endpoint = "tweets/search/recent?"
+
+	token = "AAAAAAAAAAAAAAAAAAAAAAOYbAEAAAAAe%2FQ2Gc7uM0MFdQ%2FzBr8L%2FdstL%2BU%3DljpSCs1syJ57AYc1CnQoaVRtNvCfLIt11TBhwc6esHaq7Jftzh"
+
+	params = "&tweet.fields=created_at&max_results=#{max_results}"
+
+	url = base <> endpoint <> query <> params
+
+	headers = [{"Authorization", "Bearer #{token}"},
+			   {"Accept", "Application/json; Charset=utf-8"}]
+
+	{:ok, response} = HTTPoison.get(url, headers, [])
+
+	req = Poison.decode!(response.body)
+
+	list = req["data"]
+
+	# ----- Responses -----------
+
+	IO.inspect List.first(list)
+
+	#first_id = List.first(list)["id"]
+	#IO.inspect first_id
+
+	# {:ok, response2} = HTTPoison.get(base <> endpoint <> "query=conversation_id:#{first_id}", headers, [])
+
+	#IO.inspect response2
+
+	ordered_list = Enum.reverse(list)
+
+	Enum.each(ordered_list, fn i -> print_text(i) end)
+  end
+
+
+  def print_text(item) do
+	text = String.replace(item["text"], "\n\n", "\n")
+
+	{_, created_at, _} = String.replace(item["created_at"], "Z", "+03:00") |> DateTime.from_iso8601
+
+	formated = Calendar.strftime(created_at, "%d/%m/%y %H:%M:%S")
+	
+	IO.puts formated <> "  ---------------------------------------------------\n"
+	IO.puts(text <> "\n")
+	IO.puts(item["id"])
+  end
+end
+

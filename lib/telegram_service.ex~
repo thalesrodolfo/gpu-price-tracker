@@ -1,0 +1,9 @@
+defmodule TelegramService do
+  @telegram_token "5207641252:AAFEY45t0jzUJxYs5xscyN39AV8fOqZHa2c"
+
+  @group_id "-699588211"
+
+  def send_message(msg) do
+	Telegram.Api.request(@telegram_token, "sendMessage", chat_id: @group_id, text: msg)
+  end
+end
