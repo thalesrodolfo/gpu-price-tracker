@@ -1,9 +1,11 @@
 defmodule PeriodicJob do
   use GenServer
+  require Logger
 
   @period 60_000 # 1 minute
 
-  def start_link(_args) do
+  def start() do
+	Logger.info("Starting...")
 	GenServer.start_link(__MODULE__, %{})
   end
 
@@ -14,7 +16,7 @@ defmodule PeriodicJob do
   end
 
   def handle_info(:fetch_price, state) do
-	IO.puts "fetching..."
+	Logger.info("Fetching...")
 	GpuPriceTracker.main
 
 	execute_fetch()
@@ -23,6 +25,7 @@ defmodule PeriodicJob do
   end
 
   def execute_fetch() do
-	Process.send_after(self(), :fetch_price, @period * 15)
+	Logger.info("Waiting...")
+	Process.send_after(self(), :fetch_price, @period * 8)
   end
 end
