@@ -26,14 +26,10 @@ defmodule GpuPriceTracker do
 
 	token = Application.fetch_env!(:gpu_price_tracker, :twitter_token)
 
-	IO.puts "Twitter token: #{token}"
-
 	headers = [{"Authorization", "Bearer #{token}"},
 			   {"Accept", "Application/json; Charset=utf-8"}]
 
 	{:ok, response} = HTTPoison.get(url, headers, [])
-
-	IO.inspect response
 
 	users = Poison.decode!(response.body)
 	|> Map.get("includes")
