@@ -3,7 +3,7 @@ defmodule GpuPriceTracker do
 
   @base_url "https://api.twitter.com/2/"
   @endpoint "tweets/search/recent?"
-  @token Application.fetch_env!(:gpu_price_tracker, :twitter_token)
+
 
   def main do
 
@@ -24,7 +24,11 @@ defmodule GpuPriceTracker do
 
 	url = Enum.join [@base_url, @endpoint, query, params]
 
-	headers = [{"Authorization", "Bearer #{@token}"},
+	token = Application.fetch_env!(:gpu_price_tracker, :twitter_token)
+
+	IO.puts "Twitter token: #{token}"
+
+	headers = [{"Authorization", "Bearer #{token}"},
 			   {"Accept", "Application/json; Charset=utf-8"}]
 
 	{:ok, response} = HTTPoison.get(url, headers, [])

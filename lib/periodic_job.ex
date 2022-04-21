@@ -26,6 +26,6 @@ defmodule PeriodicJob do
 
   def execute_fetch() do
 	Logger.info("Waiting...")
-	Process.send_after(self(), :fetch_price, @period * 8)
+	Process.send_after(self(), :fetch_price, @period * 4)
   end
 end
