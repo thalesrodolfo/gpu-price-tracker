@@ -8,7 +8,7 @@ defmodule GpuPriceTracker do
   def main do
 
 	{tweets, users} =
-	  getTweets("(from:gpubipolar OR from:pcbuildwizard) (\"Menor preço desde\" OR \"⭐⭐⭐⭐⭐\") -terabyte has:links", 20)
+	  getTweets("from:gpubipolar \"Menor preço desde\" has:links")
 
 	send_results(tweets, users)
 	update_last_id(tweets)
