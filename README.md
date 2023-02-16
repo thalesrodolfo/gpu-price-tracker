@@ -1,6 +1,8 @@
 # GpuPriceTracker
 
-**TODO: Add description**
+A personal application to send me the best prices of gpu through some accounts on twitter. It was used when I was looking for a new gpu for me :)
+
+Basically it keeps monitoring some accounts on twitter that posts abount gpu deals (in Brazil) and then send a notification to my telegram. This application was deployed on amazon and was deactivated when I bought my new gpu.
 
 ## Installation
 
